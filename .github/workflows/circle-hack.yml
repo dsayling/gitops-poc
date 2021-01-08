@@ -11,11 +11,11 @@ on:
     types: [unpublished]
 
 env:
-  circle-config: ${{ github.event_name }}-{{ github.event.action }}
+  CIRCLE_CONFIG: ${{ github.event_name }}-{{ github.event.action }}
 
 jobs:
   circle-workflow:
-    name: ${{env.circle-config}} workflow
+    name: ${{env.CIRCLE_CONFIG}} workflow
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -23,13 +23,14 @@ jobs:
         fetch-depth: 2
     - run: git checkout HEAD^
     - name: Replace config
-      run: cp .circleci/${{ env.circle-config }}.yml .circleci/config.yml
+      run: cp .circleci/${CIRCLE_CONFIG}.yml .circleci/config.yml
     - name: commit-push_branch-test
       uses: dsayling/commit-branch-check-action@v0.0.8
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         files: ".circleci/config.yml"
-        commit-message: "Run ${{ env.circle-config }} workflow"
-        dest-branch: ${{ env.circle-config }}
+        commit-message: "Run workflow"
+#         dest-branch: ${{ env.circle-config }}
+        dest-branch: ${{ github.event_name }}-{{ github.event.action }}
         verify-checks: true
         delete-after-checks: true
