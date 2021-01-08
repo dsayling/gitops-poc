@@ -10,12 +10,10 @@ on:
   release:
     types: [unpublished]
 
-env:
-  CIRCLE_CONFIG: ${{ github.event_name }}-{{ github.event.action }}
 
 jobs:
   circle-workflow:
-    name: ${{env.CIRCLE_CONFIG}} workflow
+    name: ${{ github.event_name }}-{{ github.event.action }} workflow
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -23,7 +21,7 @@ jobs:
         fetch-depth: 2
     - run: git checkout HEAD^
     - name: Replace config
-      run: cp .circleci/${CIRCLE_CONFIG}.yml .circleci/config.yml
+      run: cp .circleci/${{ github.event_name }}-{{ github.event.action }}.yml .circleci/config.yml
     - name: commit-push_branch-test
       uses: dsayling/commit-branch-check-action@v0.0.8
       with:
