@@ -25,7 +25,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         files: ".circleci/config.yml"
-        commit-message: "Run ${{ github.event }}"
+        commit-message: "Run ${{ github.event_name }} workflow"
         dest-branch: ${{github.event_name}}
         verify-checks: true
         delete-after-checks: true
