@@ -1,0 +1,13 @@
+version: 2.1
+
+jobs:
+  issue-closed:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - run: echo "issue-closed"
+
+workflows:
+  issue-closed:
+    jobs:
+      - issue-closed
