@@ -1,0 +1,13 @@
+version: 2.1
+
+jobs:
+  issue-opened:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - run: echo "issue opened, you can imagine sending a slack notification if you've already got the orb setup"
+
+workflows:
+  issue-opened:
+    jobs:
+      - issue-opened

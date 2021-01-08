@@ -1,13 +1,13 @@
 version: 2.1
 
 jobs:
-  notify:
+  issue-closed:
     docker:
       - image: 'cimg/base:stable'
     steps:
-      - run: echo "hello world"
+      - run: echo "issue-closed"
 
 workflows:
-  notify:
+  issue-closed:
     jobs:
-      - notify
+      - issue-closed

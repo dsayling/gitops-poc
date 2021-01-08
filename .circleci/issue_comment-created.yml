@@ -1,0 +1,13 @@
+version: 2.1
+
+jobs:
+  issue_comment:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - run: echo "issue has comment"
+
+workflows:
+  issue_comment:
+    jobs:
+      - issue_comment
