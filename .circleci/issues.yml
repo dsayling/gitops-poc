@@ -1,15 +1,12 @@
-orbs:
-  discord: tkyshm/discord-orb@0.0.8
+version: 2.1
+
 jobs:
   notify:
     docker:
       - image: 'cimg/base:stable'
     steps:
-      - discord/notify:
-          success_message: "New issue created in gitops-poc"
-          event: always
+      - run: echo "hello world"
 workflows:
   send-notification:
     jobs:
-      - notify:
-          context: slack-secrets
+      - notify
