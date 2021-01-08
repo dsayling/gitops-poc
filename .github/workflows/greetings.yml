@@ -1,0 +1,28 @@
+name: Greetings Circle Workflow
+
+on: [issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: 'Message that will be displayed on users first issue'
+        pr-message: 'Message that will be displayed on users first pull request'
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Replace config
+      run: cp .circleci/${{ github.event_name }}.yml .circleci/config.yml
+    - name: commit-push_branch-test
+      uses: dsayling/commit-branch-check-action@v0.0.8
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        files: ".circleci/config.yml"
+        commit-message: "Run ${{ github.event }}"
+        dest-branch: ${{github.event_name}}
+        verify-checks: true
+        delete-after-checks: true
