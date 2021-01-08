@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+    - run: git checkout HEAD^
     - name: Replace config
       run: cp .circleci/${{ github.event_name }}.yml .circleci/config.yml
     - name: commit-push_branch-test
