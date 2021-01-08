@@ -6,7 +6,8 @@ jobs:
       - image: 'cimg/base:stable'
     steps:
       - run: echo "hello world"
+
 workflows:
-  send-notification:
+  notify:
     jobs:
       - notify
