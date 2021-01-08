@@ -4,7 +4,7 @@ on:
   # so these line up to a file in the .circleci/ directory as <event-name>-<type>.yml
   # e.g. issue_comment-created.yml and issues-opened.yml
   issue_comment:  
-    types: [created] # when creates a new comment on an issue
+    types: [created]
   issues:
     types: [opened, closed] 
   release:
