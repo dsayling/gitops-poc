@@ -1,0 +1,35 @@
+name: Circle Workflow
+
+on: 
+  # so these line up to a file in the .circleci/ directory as <event-name>-<type>.yml
+  # e.g. issue_comment-created.yml and issues-opened.yml
+  issue_comment:  
+    types: [created] # when creates a new comment on an issue
+  issues:
+    types: [opened, closed] 
+  release:
+    types: [unpublished]
+
+env:
+  circle-config: ${{ github.event_name }}-{{ github.event.action }}
+
+jobs:
+  circle-workflow:
+    name: ${{env.circle-config}} workflow
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+    - run: git checkout HEAD^
+    - name: Replace config
+      run: cp .circleci/${{ env.circle-config }}.yml .circleci/config.yml
+    - name: commit-push_branch-test
+      uses: dsayling/commit-branch-check-action@v0.0.8
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        files: ".circleci/config.yml"
+        commit-message: "Run ${{ env.circle-config }} workflow"
+        dest-branch: ${{ env.circle-config }}
+        verify-checks: true
+        delete-after-checks: true
