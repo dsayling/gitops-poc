@@ -10,4 +10,8 @@ jobs:
 workflows:
   noop:
     jobs:
-      - noop
+      - noop:
+          filters:
+            # ignore any commit on any branch by default
+            branches:
+              ignore: /.*/
