@@ -1,5 +1,5 @@
 # gitops-poc
-Proof of concept to demonstrate using mulitple CircleCI workflows around any github event. 
+Proof of concept to demonstrate using multiple CircleCI workflows around any github event. 
 
 ## Basically
 This project uses an action that allows a user to perform a simple commit and push. Any changes to the codebase prior this action can be included in the commit, e.g lint fix a file, copy a file around, etc. After the push, any github event hooks on the branch will run just like github works and the branch checks are verfied success, and then the branch is deleted.
