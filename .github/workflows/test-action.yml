@@ -10,15 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: main
+        fetch-depth: 0
     - name: Replace config
-      run: cp .circleci/release-created.yml .circleci/config.yml
+      run: cp .circleci/release-created.yml blahblah.txt
     - name: commit-push_branch-test
-      uses: dsayling/commit-branch-check-action@v0.1.0
+      uses: dsayling/commit-branch-check-action@use-src-ref
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        files: ".circleci/config.yml"
-        commit-message: "Run test PR workflow"
-        dest-branch: pr-test-workflow
-        verify-checks: true
-        delete-after-checks: true
+        files: "blahblah.txt"
