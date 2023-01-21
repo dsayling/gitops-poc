@@ -22,7 +22,7 @@ jobs:
     - name: Replace config
       run: cp .circleci/${{ github.event_name }}-${{ github.event.action }}.yml .circleci/config.yml
     - name: commit-push_branch-test
-      uses: dsayling/commit-branch-check-action@v0.1.0
+      uses: dsayling/commit-branch-check-action@v0.1.5
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         files: ".circleci/config.yml"
