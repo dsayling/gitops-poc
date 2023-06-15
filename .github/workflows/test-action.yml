@@ -14,7 +14,7 @@ jobs:
     - name: Replace config
       run: cp .circleci/release-created.yml .circleci/config.yml
     - name: commit-push_branch-test
-      uses: dsayling/commit-branch-check-action@v0.1.5
+      uses: dsayling/commit-branch-check-action@v0.1.6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         files: ".circleci/config.yml"
