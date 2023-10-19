@@ -16,7 +16,7 @@ jobs:
     name: ${{ github.event_name }}-${{ github.event.action }} workflow
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         ref: main
     - name: Replace config
